@@ -34,6 +34,21 @@ Tidewick is a 2D pixel-art action roguelite made in Godot 4. The player is a lig
 
 **Build order:** the roguelike mode's core loop comes first (it's just the loop with no meta systems). The town/story layer is added on top later.
 
+### Enemy roster
+Each enemy tests a different beam skill (aim, hold, sweep, switch off). Size signals threat: small = fast and fragile, big = slow and tough. Nothing is bigger than the lighthouse except the final boss. All fog creatures share a visual thread (same eye color / wispy fog edges) so they read instantly as "burn this". Collision shapes match the visible body, not the canvas.
+
+| Enemy | Canvas (body) | Behaviour | Tests | Added at |
+|---|---|---|---|---|
+| **Fogling** | 16×16 (~12×12) | Small wisp, drifts straight in, dies fast | Basic aiming | Now (replaces placeholder) |
+| **Drowned Sailor** | 16×24 | Slow, tough, needs a long hold to burn | Holding the beam; fuel pressure | Step 6 (fuel) |
+| **Moth** | 16×16 (~8×8) | Drawn *to* the beam, drains oil while touching it | Turning the light away/off | Step 6 (fuel) |
+| **Mistgull** | 16×16 (~10×8) | Fast, zig-zagging, arrives in flocks | Quick sweeps | Step 7 (waves) |
+| **Fog Mass** | 32×32 (~28×28) | Big blob, splits into 2–3 Foglings when burned | Planning; don't burn it near the tower | Step 7 (waves) |
+| **Shade** | 16×24 (thin) | Moves only in darkness, freezes in the light | Tracking threats behind you | Later (late nights / Fog Pact) |
+| **Siren** | 16×32 or 24×32 | Stays at the screen edge, pulls the beam toward her | Fighting the controls | Later (late nights / Fog Pact) |
+
+The final boss (at the fog's source) belongs to the roguelite story; the roguelike mode has no boss, just escalating nights.
+
 ### Differentiation note
 Drownlight (a Steam survival city-builder) also centers on keeping a lighthouse lit. Tidewick should stay clearly distinct by leaning into **real-time beam-aiming action and roguelite build variety**, not colony/city management.
 
