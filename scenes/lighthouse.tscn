@@ -1,0 +1,31 @@
+[gd_scene format=3 uid="uid://bi8aj5qgi6ny2"]
+
+[ext_resource type="Texture2D" uid="uid://dk4o8n4qhaye3" path="res://assets/tidewick_lighthouse.png" id="1_rolx0"]
+[ext_resource type="Script" path="res://scripts/beam.gd" id="2_beam"]
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_add"]
+blend_mode = 1
+
+[node name="Lighthouse" type="Node2D"]
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_rolx0")
+offset = Vector2(0, -28)
+
+[node name="Beam" type="Node2D" parent="."]
+z_index = 1
+position = Vector2(0, -48)
+script = ExtResource("2_beam")
+
+[node name="Light" type="Polygon2D" parent="Beam"]
+material = SubResource("CanvasItemMaterial_add")
+
+[node name="Hitbox" type="Area2D" parent="Beam" groups=["beam"]]
+collision_layer = 1
+collision_mask = 0
+monitoring = false
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Beam/Hitbox"]
+
+[node name="HitPoint" type="Marker2D" parent="."]
+position = Vector2(0, -24)
